@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+import 'widgets/circle_widget.dart';
+import 'widgets/cross_widget.dart';
+
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  void onTap(int idx) {}
+
+  void togglePlayer() {}
 
   @override
   Widget build(BuildContext context) {
@@ -10,16 +22,22 @@ class HomePage extends StatelessWidget {
         title: const Text('Tic tac toe'),
       ),
       body: Center(
-        child: GridView.count(
-          crossAxisCount: 3,
-          childAspectRatio: 1.0,
-          shrinkWrap: true,
-          padding: const EdgeInsets.all(20.0),
-          physics: const NeverScrollableScrollPhysics(),
-          children: List.generate(
-            9,
-            (index) => Box(
-              index: index + 1,
+        child: SizedBox(
+          height: 300.0,
+          width: 300.0,
+          child: GridView.count(
+            crossAxisCount: 3,
+            shrinkWrap: true,
+            childAspectRatio: 1.0,
+            physics: const NeverScrollableScrollPhysics(),
+            children: List.generate(
+              9,
+              (index) => Field(
+                index: index,
+                onTap: onTap,
+                isEnable: true,
+                playerSymbol: "X",
+              ),
             ),
           ),
         ),
@@ -28,11 +46,17 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class Box extends StatelessWidget {
+class Field extends StatelessWidget {
   final int index;
-  Box({
+  final bool isEnable;
+  final ValueChanged<int> onTap;
+  final String playerSymbol;
+  Field({
     Key? key,
     required this.index,
+    required this.isEnable,
+    required this.onTap,
+    required this.playerSymbol,
   }) : super(key: key);
 
   final borderColor = Colors.grey.withOpacity(0.5);
@@ -42,22 +66,20 @@ class Box extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: isEnable ? () => onTap(index) : null,
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: Colors.white,
-          border: _getBorder(index),
+          border: _getBorder(index + 1),
         ),
-        child: Align(
-          alignment: Alignment.center,
-          child: Text(
-            '$index',
-            style: const TextStyle(
-              fontSize: 38.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+        child: Padding(
+          padding: const EdgeInsets.all(28.0),
+          child: index % 2 == 0 ? const CrossWidget() : const CircleWidget(),
         ),
+        // child: Align(
+        //   alignment: Alignment.center,
+        //   child: Text(playerSymbol),
+        // ),
       ),
     );
   }
