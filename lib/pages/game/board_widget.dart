@@ -1,44 +1,28 @@
-import 'package:flutter/material.dart';
+part of 'game_page.dart';
 
-import 'widgets/circle_widget.dart';
-import 'widgets/cross_widget.dart';
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  void onTap(int idx) {}
-
-  void togglePlayer() {}
+class BoardWidget extends StatelessWidget {
+  final double size;
+  const BoardWidget({
+    Key? key,
+    required this.size,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tic tac toe'),
-      ),
-      body: Center(
-        child: SizedBox(
-          height: 300.0,
-          width: 300.0,
-          child: GridView.count(
-            crossAxisCount: 3,
-            shrinkWrap: true,
-            childAspectRatio: 1.0,
-            physics: const NeverScrollableScrollPhysics(),
-            children: List.generate(
-              9,
-              (index) => Field(
-                index: index,
-                onTap: onTap,
-                isEnable: true,
-                playerSymbol: "X",
-              ),
-            ),
+    return SizedBox.fromSize(
+      size: Size.square(size),
+      child: GridView.count(
+        crossAxisCount: 3,
+        shrinkWrap: true,
+        childAspectRatio: 1.0,
+        physics: const NeverScrollableScrollPhysics(),
+        children: List.generate(
+          9,
+          (index) => _Field(
+            index: index,
+            onTap: (idx) {},
+            isEnable: true,
+            playerSymbol: "X",
           ),
         ),
       ),
@@ -46,12 +30,12 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class Field extends StatelessWidget {
+class _Field extends StatelessWidget {
   final int index;
   final bool isEnable;
   final ValueChanged<int> onTap;
   final String playerSymbol;
-  Field({
+  _Field({
     Key? key,
     required this.index,
     required this.isEnable,
@@ -73,13 +57,9 @@ class Field extends StatelessWidget {
           border: _getBorder(index + 1),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(28.0),
+          padding: const EdgeInsets.all(32.0),
           child: index % 2 == 0 ? const CrossWidget() : const CircleWidget(),
         ),
-        // child: Align(
-        //   alignment: Alignment.center,
-        //   child: Text(playerSymbol),
-        // ),
       ),
     );
   }

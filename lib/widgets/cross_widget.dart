@@ -1,23 +1,40 @@
 import 'package:flutter/material.dart';
 
 class CrossWidget extends StatelessWidget {
-  const CrossWidget({Key? key}) : super(key: key);
+  final Color color;
+  final double strokeWidth;
+  const CrossWidget({
+    Key? key,
+    this.color = Colors.blue,
+    this.strokeWidth = 8.0,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: _CrossPainter(),
+      painter: _CrossPainter(
+        color: color,
+        strokeWidth: strokeWidth,
+      ),
     );
   }
 }
 
 class _CrossPainter extends CustomPainter {
+  final Color color;
+  final double strokeWidth;
+
+  _CrossPainter({
+    required this.color,
+    required this.strokeWidth,
+  });
+
   @override
   void paint(Canvas canvas, Size size) {
     final painter = Paint()
-      ..color = Colors.red
+      ..color = color
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = 10.0;
+      ..strokeWidth = strokeWidth;
 
     canvas.drawLine(
       Offset(0.0, size.height),

@@ -3,17 +3,34 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class CircleWidget extends StatelessWidget {
-  const CircleWidget({Key? key}) : super(key: key);
+  final Color color;
+  final double strokeWidth;
+  const CircleWidget({
+    Key? key,
+    this.color = Colors.greenAccent,
+    this.strokeWidth = 8.0,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: _CirclePainter(),
+      painter: _CirclePainter(
+        color: color,
+        strokeWidth: strokeWidth,
+      ),
     );
   }
 }
 
 class _CirclePainter extends CustomPainter {
+  final Color color;
+  final double strokeWidth;
+
+  _CirclePainter({
+    required this.color,
+    required this.strokeWidth,
+  });
+
   @override
   void paint(Canvas canvas, Size size) {
     final centerX = size.width / 2;
@@ -25,8 +42,8 @@ class _CirclePainter extends CustomPainter {
         center,
         radius,
         Paint()
-          ..color = Colors.blueAccent
-          ..strokeWidth = 8.0
+          ..color = color
+          ..strokeWidth = strokeWidth
           ..style = PaintingStyle.stroke);
   }
 
