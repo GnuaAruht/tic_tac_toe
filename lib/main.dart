@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tic_tac_toe/pages/game/game_page.dart';
 
-import 'pages/game/game_page.dart';
+import 'pages/home/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const GamePage(),
+      home: const HomePage(),
     );
   }
 }
