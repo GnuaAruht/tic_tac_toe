@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../data/ui_constants.dart';
+
 class CrossWidget extends StatelessWidget {
   final Color color;
   final double strokeWidth;
   const CrossWidget({
     Key? key,
-    this.color = Colors.blue,
-    this.strokeWidth = 8.0,
+    this.color = crossWidgetColor,
+    this.strokeWidth = widgetStrokeWidth,
   }) : super(key: key);
 
   @override

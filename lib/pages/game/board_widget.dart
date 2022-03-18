@@ -35,17 +35,13 @@ class _Field extends StatelessWidget {
   final bool isEnable;
   final ValueChanged<int> onTap;
   final String playerSymbol;
-  _Field({
+  const _Field({
     Key? key,
     required this.index,
     required this.isEnable,
     required this.onTap,
     required this.playerSymbol,
   }) : super(key: key);
-
-  final borderColor = Colors.grey.withOpacity(0.5);
-  final borderWidth = 1.6;
-  final borderStyle = BorderStyle.solid;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +54,7 @@ class _Field extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(32.0),
-          child: index % 2 == 0 ? const CrossWidget() : const CircleWidget(),
+          child: index % 2 != 0 ? const CrossWidget() : const CircleWidget(),
         ),
       ),
     );
@@ -67,7 +63,7 @@ class _Field extends StatelessWidget {
   Border _getBorder(int index) {
     switch (index) {
       case 1:
-        return Border(
+        return const Border(
             right: BorderSide(
               color: borderColor,
               width: borderWidth,
@@ -79,7 +75,7 @@ class _Field extends StatelessWidget {
               style: borderStyle,
             ));
       case 2:
-        return Border(
+        return const Border(
             left: BorderSide(
               color: borderColor,
               width: borderWidth,
@@ -96,7 +92,7 @@ class _Field extends StatelessWidget {
               style: borderStyle,
             ));
       case 3:
-        return Border(
+        return const Border(
             left: BorderSide(
               color: borderColor,
               width: borderWidth,
@@ -108,7 +104,7 @@ class _Field extends StatelessWidget {
               style: borderStyle,
             ));
       case 4:
-        return Border(
+        return const Border(
           right: BorderSide(
             color: borderColor,
             width: borderWidth,
@@ -132,7 +128,7 @@ class _Field extends StatelessWidget {
           style: borderStyle,
         );
       case 6:
-        return Border(
+        return const Border(
           left: BorderSide(
             color: borderColor,
             width: borderWidth,
@@ -150,7 +146,7 @@ class _Field extends StatelessWidget {
           ),
         );
       case 7:
-        return Border(
+        return const Border(
           right: BorderSide(
             color: borderColor,
             width: borderWidth,
@@ -163,7 +159,7 @@ class _Field extends StatelessWidget {
           ),
         );
       case 8:
-        return Border(
+        return const Border(
             left: BorderSide(
               color: borderColor,
               width: borderWidth,
@@ -180,7 +176,7 @@ class _Field extends StatelessWidget {
               style: borderStyle,
             ));
       case 9:
-        return Border(
+        return const Border(
             left: BorderSide(
               color: borderColor,
               width: borderWidth,

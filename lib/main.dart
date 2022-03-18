@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe/pages/game/game_page.dart';
 
 import 'pages/home/home_page.dart';
 

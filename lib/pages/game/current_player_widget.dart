@@ -18,7 +18,7 @@ class CurrentPlayerWidget extends StatelessWidget {
           height: 10.0,
         ),
         Text(
-          "It's player 1 turn.",
+          "Player 1's move.",
           style: TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.w600,

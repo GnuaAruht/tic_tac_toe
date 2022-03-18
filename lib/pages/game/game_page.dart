@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../data/ui_constants.dart';
 import '../../widgets/circle_widget.dart';
 import '../../widgets/cross_widget.dart';
 
@@ -16,10 +17,6 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-  void onTap(int idx) {}
-
-  void togglePlayer() {}
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -33,6 +30,7 @@ class _GamePageState extends State<GamePage> {
           ),
           child: Column(
             children: [
+              const Spacer(),
               const GameStatusWidget(),
               const Spacer(flex: 2),
               BoardWidget(size: size.width * 0.76),

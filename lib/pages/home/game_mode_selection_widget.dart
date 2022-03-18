@@ -18,26 +18,34 @@ class GameModeSelectionWidget extends StatelessWidget {
         const SizedBox(
           height: 18.0,
         ),
-        GameButtonWidget(
+        _GameButtonWidget(
           label: "With AI",
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const GamePage()),
+            );
+          },
         ),
         const SizedBox(
           height: 12.0,
         ),
-        GameButtonWidget(
+        _GameButtonWidget(
           label: "With a friend",
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const GamePage()),
+            );
+          },
         ),
       ],
     );
   }
 }
 
-class GameButtonWidget extends StatelessWidget {
+class _GameButtonWidget extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;
-  const GameButtonWidget({
+  const _GameButtonWidget({
     Key? key,
     required this.label,
     required this.onPressed,
@@ -48,12 +56,9 @@ class GameButtonWidget extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
+        fixedSize: const Size.fromWidth(240.0),
         shape: const StadiumBorder(),
         elevation: 0.0,
-        padding: const EdgeInsets.symmetric(
-          vertical: 12.0,
-          horizontal: 28.0,
-        ),
         textStyle: const TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: 16.0,

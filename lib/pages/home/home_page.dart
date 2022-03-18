@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../widgets/circle_widget.dart';
 import '../../widgets/cross_widget.dart';
+import '../game/game_page.dart';
 
 part 'game_title_widget.dart';
-part 'game_icons_widget.dart';
 part 'game_mode_selection_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,17 +13,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            GameTitleWidget(),
-            SizedBox(height: 28.0),
-            GameIconsWidget(),
-            SizedBox(height: 38.0),
-            GameModeSelectionWidget(),
-          ],
-        ),
+      body: Column(
+        children: const [
+          Spacer(flex: 2),
+          GameTitleWidget(),
+          Spacer(),
+          GameModeSelectionWidget(),
+          Spacer(flex: 2),
+        ],
       ),
     );
   }

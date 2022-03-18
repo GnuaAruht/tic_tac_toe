@@ -2,13 +2,15 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../data/ui_constants.dart';
+
 class CircleWidget extends StatelessWidget {
   final Color color;
   final double strokeWidth;
   const CircleWidget({
     Key? key,
-    this.color = Colors.greenAccent,
-    this.strokeWidth = 8.0,
+    this.color = circleWidgetColor,
+    this.strokeWidth = widgetStrokeWidth,
   }) : super(key: key);
 
   @override
