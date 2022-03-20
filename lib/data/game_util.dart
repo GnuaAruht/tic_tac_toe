@@ -1,7 +1,6 @@
 class GameUtil {
   static const Player1 = 1;
   static const Player2 = -1;
-  static const AI = -1;
 
   static const DRAW = 2;
   static const NO_WINNER_YET = 0;

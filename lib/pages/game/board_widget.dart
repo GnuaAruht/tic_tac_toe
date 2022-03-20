@@ -15,13 +15,23 @@ class BoardWidget extends GetWidget<GameController> {
         fit: StackFit.expand,
         children: [
           _listenBoardData(),
-          _listGameResult(),
+          _listenAiPlaying(),
+          _listenGameResult(),
         ],
       ),
     );
   }
 
-  Widget _listGameResult() {
+  Widget _listenAiPlaying() {
+    return Obx(() => IgnorePointer(
+          ignoring: !controller.isAiPlaying.value,
+          child: Container(
+            color: Colors.transparent,
+          ),
+        ));
+  }
+
+  Widget _listenGameResult() {
     return Obx(
       () => IgnorePointer(
         ignoring: controller.gameResult.value == 0,
@@ -31,23 +41,19 @@ class BoardWidget extends GetWidget<GameController> {
           color: controller.gameResult.value != 0
               ? Colors.grey.withOpacity(0.2)
               : Colors.transparent,
-          child: _buildForGameResult(controller.gameResult.value),
+          child: _buildForGameResult(),
         ),
       ),
     );
   }
 
-  Widget? _buildForGameResult(int gameResult) {
-    if (gameResult != 0) {
-      final _gameStatus = gameResult == 1
-          ? "Player 1 win"
-          : gameResult == -1
-              ? "Player 2 win"
-              : "Draw";
+  Widget? _buildForGameResult() {
+    final _gameResultStatus = controller.gameResultStatus;
+    if (_gameResultStatus != null) {
       return Text(
-        _gameStatus,
+        _gameResultStatus,
         style: const TextStyle(
-          fontSize: 32.0,
+          fontSize: 28.0,
           fontWeight: FontWeight.w600,
         ),
       );
