@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../data/ui_constants.dart';
+import '../constants/ui_constants.dart';
 
 class CrossWidget extends StatelessWidget {
   final Color color;

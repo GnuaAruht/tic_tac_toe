@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../data/game_controller.dart';
-import '../../data/game_util.dart';
-import '../../data/ui_constants.dart';
+import '../../constants/ui_constants.dart';
+import '../../controller/game_controller.dart';
+import '../../game_ai/game_util.dart';
 import '../../widgets/circle_widget.dart';
 import '../../widgets/cross_widget.dart';
 

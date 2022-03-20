@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:tic_tac_toe/data/game_ai.dart';
 
-import 'game_util.dart';
+import '../game_ai/game_ai.dart';
+import '../game_ai/game_util.dart';
 
 class GameController extends GetxController {
   var player1Win = 0.obs;
