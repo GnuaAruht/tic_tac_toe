@@ -18,4 +18,10 @@ class Board {
       board[idx] = player;
     }
   }
+
+  bool isEnable(int idx) => GameUtil.isValidMove(board, idx);
+
+  int getDataAt(int idx) {
+    return board[idx];
+  }
 }

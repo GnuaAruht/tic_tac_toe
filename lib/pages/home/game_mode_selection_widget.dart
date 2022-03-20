@@ -21,9 +21,8 @@ class GameModeSelectionWidget extends StatelessWidget {
         _GameButtonWidget(
           label: "With AI",
           onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => const GamePage()),
-            );
+            Get.to(() => const GamePage(),
+                binding: GamePageBinding(isMultiPlayer: false));
           },
         ),
         const SizedBox(
@@ -32,9 +31,8 @@ class GameModeSelectionWidget extends StatelessWidget {
         _GameButtonWidget(
           label: "With a friend",
           onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => const GamePage()),
-            );
+            Get.to(() => const GamePage(),
+                binding: GamePageBinding(isMultiPlayer: true));
           },
         ),
       ],

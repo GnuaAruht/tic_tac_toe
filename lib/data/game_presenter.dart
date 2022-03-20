@@ -16,7 +16,13 @@ class GamePresenter {
 
   void onPlay(int idx) {
     board.move(idx, _currentPlayer);
-    // todo: check game result
+    final _result = GameUtil.checkIfWinnerFound(board.board);
+    if (_result == GameUtil.Player1 ||
+        _result == GameUtil.Player2 ||
+        _result == GameUtil.DRAW) {
+      showGameResult(_result);
+      return;
+    }
     if (isMultiPlayer) {
       GameUtil.togglePlayer(_currentPlayer);
     } else {
@@ -24,8 +30,15 @@ class GamePresenter {
         board.board,
         GameUtil.AI,
       );
-      board.move(idx, _aiMove);
-      // todo: check game result
+      board.move(idx, _aiMove); // ai move
+      // check game result
+      final _result = GameUtil.checkIfWinnerFound(board.board);
+      if (_result == GameUtil.Player1 ||
+          _result == GameUtil.Player2 ||
+          _result == GameUtil.DRAW) {
+        showGameResult(_result);
+        return;
+      }
     }
   }
 

@@ -1,6 +1,6 @@
 part of 'game_page.dart';
 
-class BoardWidget extends StatelessWidget {
+class BoardWidget extends GetWidget<GameController> {
   final double size;
   const BoardWidget({
     Key? key,
@@ -11,18 +11,66 @@ class BoardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox.fromSize(
       size: Size.square(size),
-      child: GridView.count(
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          _listenBoardData(),
+          _listGameResult(),
+        ],
+      ),
+    );
+  }
+
+  Widget _listGameResult() {
+    return Obx(
+      () => IgnorePointer(
+        ignoring: controller.gameResult.value == 0,
+        child: Container(
+          padding: const EdgeInsets.all(20.0),
+          alignment: Alignment.center,
+          color: controller.gameResult.value != 0
+              ? Colors.grey.withOpacity(0.2)
+              : Colors.transparent,
+          child: _buildForGameResult(controller.gameResult.value),
+        ),
+      ),
+    );
+  }
+
+  Widget? _buildForGameResult(int gameResult) {
+    if (gameResult != 0) {
+      final _gameStatus = gameResult == 1
+          ? "Player 1 win"
+          : gameResult == -1
+              ? "Player 2 win"
+              : "Draw";
+      return Text(
+        _gameStatus,
+        style: const TextStyle(
+          fontSize: 32.0,
+          fontWeight: FontWeight.w600,
+        ),
+      );
+    }
+    return null;
+  }
+
+  Widget _listenBoardData() {
+    return Obx(
+      () => GridView.count(
         crossAxisCount: 3,
         shrinkWrap: true,
         childAspectRatio: 1.0,
         physics: const NeverScrollableScrollPhysics(),
         children: List.generate(
-          9,
+          controller.board.length,
           (index) => _Field(
             index: index,
-            onTap: (idx) {},
-            isEnable: true,
-            playerSymbol: "X",
+            onTap: (idx) {
+              controller.move(idx);
+            },
+            isEnable: controller.isEnable(index),
+            playerId: controller.getDataAt(index),
           ),
         ),
       ),
@@ -34,13 +82,13 @@ class _Field extends StatelessWidget {
   final int index;
   final bool isEnable;
   final ValueChanged<int> onTap;
-  final String playerSymbol;
+  final int playerId;
   const _Field({
     Key? key,
     required this.index,
     required this.isEnable,
     required this.onTap,
-    required this.playerSymbol,
+    required this.playerId,
   }) : super(key: key);
 
   @override
@@ -54,10 +102,21 @@ class _Field extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(32.0),
-          child: index % 2 != 0 ? const CrossWidget() : const CircleWidget(),
+          child: _getPlayerWidget(playerId),
         ),
       ),
     );
+  }
+
+  Widget? _getPlayerWidget(int playerId) {
+    switch (playerId) {
+      case GameUtil.Player1:
+        return const CrossWidget();
+      case GameUtil.Player2:
+        return const CircleWidget();
+      default:
+        return null;
+    }
   }
 
   Border _getBorder(int index) {

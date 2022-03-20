@@ -25,9 +25,6 @@ class GameUtil {
   static bool isValidMove(List<int> board, int idx) => board[idx] == EMPTY;
 
   static int checkIfWinnerFound(List<int> board) {
-    if (isBoardFull(board)) {
-      return DRAW;
-    }
     for (var list in WIN_CONDITIONS_LIST) {
       if (board[list[0]] != EMPTY &&
           board[list[0]] == board[list[1]] &&
@@ -35,7 +32,10 @@ class GameUtil {
         return board[list[0]];
       }
     }
-    return EMPTY;
+    if (isBoardFull(board)) {
+      return DRAW;
+    }
+    return NO_WINNER_YET;
   }
 
   static bool isBoardFull(List<int> board) {

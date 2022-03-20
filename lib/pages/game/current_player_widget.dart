@@ -1,30 +1,58 @@
 part of 'game_page.dart';
 
-class CurrentPlayerWidget extends StatelessWidget {
+class CurrentPlayerWidget extends GetWidget<GameController> {
   const CurrentPlayerWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
+      children: [
         SizedBox(
           height: 20.0,
           width: 20.0,
-          child: CircleWidget(
-            strokeWidth: 6.0,
+          child: Obx(
+            () => _getPlayerSymbol(controller.currentPlayer.value),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10.0,
         ),
-        Text(
-          "Player 1's move.",
-          style: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.w600,
+        Obx(
+          () => Text(
+            _getPlayerMove(controller.currentPlayer.value),
+            style: const TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         )
       ],
     );
+  }
+
+  Widget _getPlayerSymbol(int playerId) {
+    switch (playerId) {
+      case GameUtil.Player1:
+        return const CrossWidget(
+          strokeWidth: 6.0,
+        );
+      case GameUtil.Player2:
+        return const CircleWidget(
+          strokeWidth: 6.0,
+        );
+      default:
+        throw ArgumentError("Unknow playerId");
+    }
+  }
+
+  String _getPlayerMove(int playerId) {
+    switch (playerId) {
+      case GameUtil.Player1:
+        return "Player 1's move.";
+      case GameUtil.Player2:
+        return "Player 2's move.";
+      default:
+        throw ArgumentError("Unknown playerId");
+    }
   }
 }
